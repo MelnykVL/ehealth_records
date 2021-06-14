@@ -19,12 +19,10 @@ public class ResultsServlet extends HttpServlet {
 
     static String Path = "/Diploma-1.0/results/";
     static String ServerPath = "/home/vlad/Apache Tomcat/apache-tomcat-9.0.45/webapps/Diploma-1.0/results";
-    static String LocalPath = "/home/vlad/IdeaProjects/Practice/Diploma/src/main/webapp/results";
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/html; charset=UTF-8");
-        req.setCharacterEncoding("UTF-8");
+
         PrintWriter out = resp.getWriter();
 
         HttpSession session = req.getSession();
@@ -36,14 +34,7 @@ public class ResultsServlet extends HttpServlet {
 
         patient.setResults(resultCRUD.findAll(id));
 
-
-//        File dir = new File(req.getSession().getServletContext().getRealPath("/results"));;
-//        String[] files = dir.getAbsoluteFile().list();
-//        List<String> list = Arrays.asList(files);
-
         req.setAttribute("results", patient.getResults());
-//        req.setAttribute("path", Path);
-//        req.setAttribute("files", list);
 
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("results.jsp");
         requestDispatcher.forward(req, resp);
@@ -52,8 +43,7 @@ public class ResultsServlet extends HttpServlet {
 
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/html; charset=UTF-8");
-        req.setCharacterEncoding("UTF-8");
+
         PrintWriter out = resp.getWriter();
 
         HttpSession session = req.getSession();

@@ -21,8 +21,6 @@ public class SignUpServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        resp.setContentType("text/html; charset=UTF-8");
-        req.setCharacterEncoding("UTF-8");
         PrintWriter out = resp.getWriter();
 
         String email = req.getParameter("email");
@@ -57,7 +55,7 @@ public class SignUpServlet extends HttpServlet {
 
             CrudDAO<Patient> p = new PatientDAOImpl();
             if(p.save(patient) > 0) {
-                RequestDispatcher requestDispatcher = req.getRequestDispatcher("login.html");
+                RequestDispatcher requestDispatcher = req.getRequestDispatcher("index.html");
                 requestDispatcher.forward(req, resp);
             } else
                 out.write("<h1>" + "You have a problem" + "</h1>");

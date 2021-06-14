@@ -76,26 +76,6 @@ public class PatientDAOImpl implements CrudDAO<Patient>{
                         resultSet.getString("profession")
                 );
             }
-//            if(resultSet.next()){
-//                Integer patientId = resultSet.getInt("patient_id");
-//                String email = resultSet.getString("email");
-//                String fullName = resultSet.getString("full_name");
-//                LocalDate birthday = resultSet.getObject("birthday", LocalDate.class);
-//                Integer weight = resultSet.getInt("weight");
-//                Integer height = resultSet.getInt("height");
-//                String sex = resultSet.getString("sex");
-//                String info = resultSet.getString("info");
-//                String addressOfResidence = resultSet.getString("address_of_residence");
-//                String addressOfWork = resultSet.getString("address_of_work");
-//                String bloodType = resultSet.getString("blood_type");
-//                String profession = resultSet.getString("profession");
-//
-//                return Optional.of(new Patient(
-//                        patientId, email, fullName, birthday,
-//                        weight, height, sex, info,
-//                        addressOfResidence, addressOfWork, bloodType, profession
-//                ));
-//            }
 
         } catch (SQLException e){
             throw new IllegalStateException(e);
