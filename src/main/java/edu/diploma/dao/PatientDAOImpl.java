@@ -11,8 +11,6 @@ import java.util.List;
 
 public class PatientDAOImpl implements CrudDAO<Patient>{
 
-    private Connection connection;
-
     private final String SQL_SELECT_BY_ID =
             "SELECT * FROM patients WHERE patient_id=?";
 
@@ -49,15 +47,12 @@ public class PatientDAOImpl implements CrudDAO<Patient>{
     @Override
     public Patient find(Integer id) {
 
-        connection = ConnectionDB.getConnection();
-        PreparedStatement preparedStatement = null;
         Patient patient = null;
-        try{
 
-            preparedStatement = connection.prepareStatement(SQL_SELECT_BY_ID);
+        try (Connection connection = ConnectionDB.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(SQL_SELECT_BY_ID)){
 
             preparedStatement.setInt(1, id);
-
             ResultSet resultSet = preparedStatement.executeQuery();
 
             if(resultSet.next()){
@@ -79,19 +74,6 @@ public class PatientDAOImpl implements CrudDAO<Patient>{
 
         } catch (SQLException e){
             throw new IllegalStateException(e);
-        } finally {
-
-            try{
-
-                if (preparedStatement != null)
-                    preparedStatement.close();
-                if(connection != null)
-                    connection.close();
-
-            } catch (SQLException e){
-                e.printStackTrace();
-            }
-
         }
 
         return patient;
@@ -101,12 +83,9 @@ public class PatientDAOImpl implements CrudDAO<Patient>{
     public int save(Patient patient) {
 
         int status = 0;
-        connection = ConnectionDB.getConnection();
-        PreparedStatement preparedStatement = null;
 
-        try{
-
-            preparedStatement = connection.prepareStatement(SQL_INSERT_ALL);
+        try (Connection connection = ConnectionDB.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(SQL_INSERT_ALL)){
 
             preparedStatement.setString(1, patient.getEmail());
             preparedStatement.setString(2, patient.getPassword());
@@ -123,19 +102,6 @@ public class PatientDAOImpl implements CrudDAO<Patient>{
 
         } catch (SQLException e){
             throw new IllegalStateException(e);
-        }finally{
-
-            try{
-
-                if(preparedStatement != null)
-                    preparedStatement.close();
-                if(connection != null)
-                    connection.close();
-
-            } catch (SQLException e){
-                e.printStackTrace();
-            }
-
         }
         return status;
     }
@@ -144,12 +110,9 @@ public class PatientDAOImpl implements CrudDAO<Patient>{
     public int update(Patient patient) {
 
         int status = 0;
-        connection = ConnectionDB.getConnection();
-        PreparedStatement preparedStatement = null;
 
-        try{
-
-            preparedStatement = connection.prepareStatement(SQL_UPDATE_INFO);
+        try (Connection connection = ConnectionDB.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(SQL_UPDATE_INFO)){
 
             preparedStatement.setString(1, patient.getFullName());
             preparedStatement.setInt(2, patient.getWeight());
@@ -163,20 +126,8 @@ public class PatientDAOImpl implements CrudDAO<Patient>{
 
         } catch(SQLException e){
             e.printStackTrace();
-        } finally{
-
-            try{
-
-                if(preparedStatement != null)
-                    preparedStatement.close();
-                if(connection != null)
-                    connection.close();
-
-            } catch (SQLException e){
-                e.printStackTrace();
-            }
-
         }
+
         return status;
     }
 
@@ -184,31 +135,17 @@ public class PatientDAOImpl implements CrudDAO<Patient>{
     public int delete(Integer id) {
 
         int status = 0;
-        connection = ConnectionDB.getConnection();
-        PreparedStatement preparedStatement = null;
 
-        try{
-            preparedStatement = connection.prepareStatement(SQL_DELETE_ACCOUNT);
+        try (Connection connection = ConnectionDB.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(SQL_DELETE_ACCOUNT)){
 
             preparedStatement.setInt(1, id);
-
             status = preparedStatement.executeUpdate();
+
         } catch (SQLException e){
             e.printStackTrace();
-        } finally{
-
-            try{
-
-                if(preparedStatement != null)
-                    preparedStatement.close();
-                if(connection != null)
-                    connection.close();
-
-            } catch (SQLException e){
-                e.printStackTrace();
-            }
-
         }
+
         return status;
     }
 

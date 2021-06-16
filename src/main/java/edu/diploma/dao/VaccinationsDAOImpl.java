@@ -12,7 +12,6 @@ import java.util.List;
 
 public class VaccinationsDAOImpl implements CrudDAO<Vaccination>{
 
-    private Connection connection;
 
     private static final String SQL_SAVE_VACCINATION =
             "INSERT INTO vaccinations (" +
@@ -35,12 +34,9 @@ public class VaccinationsDAOImpl implements CrudDAO<Vaccination>{
     public int save(Vaccination vaccination) {
 
         int status = 0;
-        connection = ConnectionDB.getConnection();
-        PreparedStatement preparedStatement = null;
 
-        try{
-
-            preparedStatement = connection.prepareStatement(SQL_SAVE_VACCINATION);
+        try (Connection connection = ConnectionDB.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(SQL_SAVE_VACCINATION)){
 
             preparedStatement.setString(1, vaccination.getVaccineName());
             preparedStatement.setString(2, vaccination.getAddressOfBuild());
@@ -52,19 +48,6 @@ public class VaccinationsDAOImpl implements CrudDAO<Vaccination>{
 
         } catch (SQLException e){
             throw new IllegalStateException(e);
-        } finally {
-
-            try{
-
-                if (preparedStatement != null)
-                    preparedStatement.close();
-                if (connection != null)
-                    connection.close();
-
-            } catch (SQLException e){
-                e.printStackTrace();
-            }
-
         }
 
         return 0;
@@ -84,13 +67,10 @@ public class VaccinationsDAOImpl implements CrudDAO<Vaccination>{
     @Override
     public List<Vaccination> findAll(int id) {
 
-        connection = ConnectionDB.getConnection();
         List<Vaccination> vaccinations = new ArrayList<>();
-        PreparedStatement preparedStatement = null;
 
-        try {
-
-            preparedStatement = connection.prepareStatement(SQL_SELECT_ALL_RECORDS);
+        try (Connection connection = ConnectionDB.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(SQL_SELECT_ALL_RECORDS)){
 
             preparedStatement.setInt(1, id);
 
@@ -111,19 +91,6 @@ public class VaccinationsDAOImpl implements CrudDAO<Vaccination>{
 
         } catch (SQLException e){
             throw new IllegalStateException(e);
-        } finally {
-
-            try{
-
-                if(preparedStatement != null)
-                    preparedStatement.close();
-                if(connection != null)
-                    connection.close();
-
-            }catch (SQLException e){
-                e.printStackTrace();
-            }
-
         }
 
         return vaccinations;

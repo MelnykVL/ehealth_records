@@ -38,12 +38,9 @@ public class ResultsDAOImpl implements CrudDAO<Result>{
     public int save(Result result) {
 
         int status = 0;
-        connection = ConnectionDB.getConnection();
-        PreparedStatement preparedStatement = null;
 
-        try{
-
-            preparedStatement = connection.prepareStatement(SQL_SAVE_RESULT);
+        try (Connection connection = ConnectionDB.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(SQL_SAVE_RESULT)){
 
             preparedStatement.setObject(1, result.getCreatedIn());
             preparedStatement.setString(2, result.getFilePath());
@@ -55,19 +52,6 @@ public class ResultsDAOImpl implements CrudDAO<Result>{
 
         } catch (SQLException e){
             throw new IllegalStateException(e);
-        } finally {
-
-            try{
-
-                if (preparedStatement != null)
-                    preparedStatement.close();
-                if (connection != null)
-                    connection.close();
-
-            } catch (SQLException e){
-                e.printStackTrace();
-            }
-
         }
 
         return 0;
@@ -83,12 +67,9 @@ public class ResultsDAOImpl implements CrudDAO<Result>{
     public int delete(Integer id) {
 
         int status = 0;
-        connection = ConnectionDB.getConnection();
-        PreparedStatement preparedStatement = null;
 
-        try {
-
-            preparedStatement = connection.prepareStatement(SQL_DELETE_RESULT);
+        try (Connection connection = ConnectionDB.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(SQL_DELETE_RESULT)){
 
             preparedStatement.setInt(1, id);
 
@@ -96,19 +77,6 @@ public class ResultsDAOImpl implements CrudDAO<Result>{
 
         } catch (SQLException e){
             e.printStackTrace();
-        } finally{
-
-            try{
-
-                if(preparedStatement != null)
-                    preparedStatement.close();
-                if(connection != null)
-                    connection.close();
-
-            } catch (SQLException e){
-                e.printStackTrace();
-            }
-
         }
 
         return 0;
@@ -118,13 +86,10 @@ public class ResultsDAOImpl implements CrudDAO<Result>{
     @Override
     public List<Result> findAll(int id) {
 
-        connection = ConnectionDB.getConnection();
         List<Result> results = new ArrayList<>();
-        PreparedStatement preparedStatement = null;
 
-        try {
-
-            preparedStatement = connection.prepareStatement(SQL_SELECT_ALL_RESULTS);
+        try (Connection connection = ConnectionDB.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(SQL_SELECT_ALL_RESULTS)){
 
             preparedStatement.setInt(1, id);
 
@@ -145,19 +110,6 @@ public class ResultsDAOImpl implements CrudDAO<Result>{
 
         } catch (SQLException e){
             throw new IllegalStateException(e);
-        } finally {
-
-            try{
-
-                if(preparedStatement != null)
-                    preparedStatement.close();
-                if(connection != null)
-                    connection.close();
-
-            }catch (SQLException e){
-                e.printStackTrace();
-            }
-
         }
 
         return results;
