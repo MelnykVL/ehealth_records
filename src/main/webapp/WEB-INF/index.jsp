@@ -1,3 +1,4 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,7 +26,7 @@
     <button class="btn" type="submit">Ввійти</button>
 
     <div class="link">
-      <a href="sign_up.html">Створити профіль хворого</a>
+      <a href="sign_up.jsp">Створити профіль хворого</a>
     </div>
   </form>
 </div>

@@ -20,7 +20,7 @@ public class LogoutServlet extends HttpServlet {
         if(session != null)
             session.invalidate();
 
-        RequestDispatcher requestDispatcher = req.getRequestDispatcher("index.html");
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("index.jsp");
         requestDispatcher.forward(req, resp);
 
     }

@@ -45,7 +45,7 @@ public class LoginServlet extends HttpServlet {
             out.write("<script type=\"text/javascript\">\n" +
                     "alert(\"Email або пароль введені невірно!\")" +
                     "</script>");
-            RequestDispatcher requestDispatcher = req.getRequestDispatcher("index.html");
+            RequestDispatcher requestDispatcher = req.getRequestDispatcher("index.jsp");
             requestDispatcher.include(req, resp);
 
         }

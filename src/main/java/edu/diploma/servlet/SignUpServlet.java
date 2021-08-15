@@ -42,7 +42,7 @@ public class SignUpServlet extends HttpServlet {
         if(LoginDAO.validate(email)){
 
             out.write("<h2 class=\"user__title\">" + "Користувач з такою електронною поштою вже існує!" + "</h2>");
-            RequestDispatcher requestDispatcher = req.getRequestDispatcher("sign_up.html");
+            RequestDispatcher requestDispatcher = req.getRequestDispatcher("sign_up.jsp");
             requestDispatcher.include(req, resp);
 
         } else{
@@ -55,7 +55,7 @@ public class SignUpServlet extends HttpServlet {
 
             CrudDAO<Patient> p = new PatientDAOImpl();
             if(p.save(patient) > 0) {
-                RequestDispatcher requestDispatcher = req.getRequestDispatcher("index.html");
+                RequestDispatcher requestDispatcher = req.getRequestDispatcher("index.jsp");
                 requestDispatcher.forward(req, resp);
             } else
                 out.write("<h1>" + "You have a problem" + "</h1>");

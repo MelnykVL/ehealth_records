@@ -9,7 +9,7 @@ public class ConnectionDB {
     private static final String DB_DRIVER = "org.postgresql.Driver";
     private static final String DB_URL = "jdbc:postgresql://localhost:5432/ehealth_records";
     private static final String DB_USERNAME = "postgres";
-    private static final String DB_PASSWORD = "123456";
+    private static final String DB_PASSWORD = "";
 
     public static Connection getConnection(){
 
