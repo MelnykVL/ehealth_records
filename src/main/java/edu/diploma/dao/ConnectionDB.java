@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Properties;
 
@@ -12,7 +13,11 @@ public class ConnectionDB {
 
     private static Connection connection = null;
 
-    public static Connection getConnection(){
+    public static PreparedStatement getPrepareStatement(String sql) throws SQLException {
+        return getConnection().prepareStatement(sql);
+    }
+
+    private static Connection getConnection(){
         if (connection == null) {
             Properties prop = loadPropertiesFile();
 

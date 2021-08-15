@@ -33,6 +33,7 @@ public class SignUpServlet extends HttpServlet {
         String sex = req.getParameter("select_sex");
         String bloodType = req.getParameter("select_blood_type");
         String profession;
+
         if(req.getParameter("select_prof").equals("Other")) {
             profession = req.getParameter("profession");
         } else {

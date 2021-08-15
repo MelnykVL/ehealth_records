@@ -39,8 +39,7 @@ public class ResultsDAOImpl implements CrudDAO<Result>{
 
         int status = 0;
 
-        try (Connection connection = ConnectionDB.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(SQL_SAVE_RESULT)){
+        try (PreparedStatement preparedStatement = ConnectionDB.getPrepareStatement(SQL_SAVE_RESULT)){
 
             preparedStatement.setObject(1, result.getCreatedIn());
             preparedStatement.setString(2, result.getFilePath());
@@ -68,8 +67,7 @@ public class ResultsDAOImpl implements CrudDAO<Result>{
 
         int status = 0;
 
-        try (Connection connection = ConnectionDB.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(SQL_DELETE_RESULT)){
+        try (PreparedStatement preparedStatement = ConnectionDB.getPrepareStatement(SQL_DELETE_RESULT)){
 
             preparedStatement.setInt(1, id);
 
@@ -88,8 +86,7 @@ public class ResultsDAOImpl implements CrudDAO<Result>{
 
         List<Result> results = new ArrayList<>();
 
-        try (Connection connection = ConnectionDB.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(SQL_SELECT_ALL_RESULTS)){
+        try (PreparedStatement preparedStatement = ConnectionDB.getPrepareStatement(SQL_SELECT_ALL_RESULTS)){
 
             preparedStatement.setInt(1, id);
 

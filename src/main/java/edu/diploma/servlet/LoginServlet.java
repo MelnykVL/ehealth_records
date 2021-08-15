@@ -31,7 +31,7 @@ public class LoginServlet extends HttpServlet {
 
         if(id > 0){
 
-            CrudDAO<Patient> p = new PatientDAOImpl();
+            PatientDAOImpl p = new PatientDAOImpl();
 
             patient = p.find(id);
 

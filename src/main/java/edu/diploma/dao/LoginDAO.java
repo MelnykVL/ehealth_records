@@ -10,9 +10,7 @@ public class LoginDAO {
 
         int status = 0;
 
-        try (Connection con = ConnectionDB.getConnection()){
-
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM patients WHERE email=? AND password=?");
+        try (PreparedStatement ps = ConnectionDB.getPrepareStatement("SELECT * FROM patients WHERE email=? AND password=?")) {
             ps.setString(1,email);
             ps.setString(2,pass);
 
@@ -23,7 +21,7 @@ public class LoginDAO {
             if(rs.next())
                 status = rs.getInt("patient_id");
 
-            return status;
+//            return status;
 
         }catch(Exception e){
             System.out.println(e);
@@ -37,14 +35,11 @@ public class LoginDAO {
 
         boolean status = false;
 
-        try (Connection con = ConnectionDB.getConnection()) {
-
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM patients WHERE email=?");
+        try (PreparedStatement ps = ConnectionDB.getPrepareStatement("SELECT * FROM patients WHERE email=?")) {
             ps.setString(1, email);
 
             ResultSet rs = ps.executeQuery();
             status = rs.next();
-
         } catch (Exception e){
             System.out.println(e);
         }

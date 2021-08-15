@@ -37,8 +37,7 @@ public class RecordDAOImpl implements CrudDAO<Record>{
 
         int status = 0;
 
-        try (Connection connection = ConnectionDB.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(SQL_SAVE_RECORD)){
+        try (PreparedStatement preparedStatement = ConnectionDB.getPrepareStatement(SQL_SAVE_RECORD)){
 
             preparedStatement.setObject(1, record.getCreatedIn());
             preparedStatement.setString(2, record.getDisease());
@@ -68,8 +67,7 @@ public class RecordDAOImpl implements CrudDAO<Record>{
 
         int status = 0;
 
-        try (Connection connection = ConnectionDB.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(SQL_DELETE_RECORD)){
+        try (PreparedStatement preparedStatement = ConnectionDB.getPrepareStatement(SQL_DELETE_RECORD)){
 
             preparedStatement.setInt(1, id);
             status = preparedStatement.executeUpdate();
@@ -86,8 +84,7 @@ public class RecordDAOImpl implements CrudDAO<Record>{
 
         List<Record> records = new ArrayList<>();
 
-        try (Connection connection = ConnectionDB.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(SQL_SELECT_ALL_RECORDS)){
+        try (PreparedStatement preparedStatement = ConnectionDB.getPrepareStatement(SQL_SELECT_ALL_RECORDS)){
 
             preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();

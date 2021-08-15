@@ -35,8 +35,7 @@ public class VaccinationsDAOImpl implements CrudDAO<Vaccination>{
 
         int status = 0;
 
-        try (Connection connection = ConnectionDB.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(SQL_SAVE_VACCINATION)){
+        try (PreparedStatement preparedStatement = ConnectionDB.getPrepareStatement(SQL_SAVE_VACCINATION)){
 
             preparedStatement.setString(1, vaccination.getVaccineName());
             preparedStatement.setString(2, vaccination.getAddressOfBuild());
@@ -69,8 +68,7 @@ public class VaccinationsDAOImpl implements CrudDAO<Vaccination>{
 
         List<Vaccination> vaccinations = new ArrayList<>();
 
-        try (Connection connection = ConnectionDB.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(SQL_SELECT_ALL_RECORDS)){
+        try (PreparedStatement preparedStatement = ConnectionDB.getPrepareStatement(SQL_SELECT_ALL_RECORDS)){
 
             preparedStatement.setInt(1, id);
 
