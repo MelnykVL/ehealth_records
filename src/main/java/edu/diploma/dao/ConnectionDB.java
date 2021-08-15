@@ -16,10 +16,10 @@ public class ConnectionDB {
         if (connection == null) {
             Properties prop = loadPropertiesFile();
 
-            final String DB_DRIVER = prop.getProperty("driver");
-            final String DB_URL = prop.getProperty("url");
-            final String DB_USERNAME = prop.getProperty("username");
-            final String DB_PASSWORD = prop.getProperty("password");
+            final String DB_DRIVER = prop.getProperty("flyway.driver");
+            final String DB_URL = prop.getProperty("flyway.url");
+            final String DB_USERNAME = prop.getProperty("flyway.user");
+            final String DB_PASSWORD = prop.getProperty("flyway.password");
 
             try {
                 Class.forName(DB_DRIVER);
