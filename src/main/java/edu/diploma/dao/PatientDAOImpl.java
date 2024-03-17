@@ -2,14 +2,13 @@ package edu.diploma.dao;
 
 import edu.diploma.entity.Patient;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
 
-public class PatientDAOImpl implements CrudDAO<Patient>{
+public class PatientDAOImpl implements CrudDAO<Patient> {
 
     private static final String SQL_SELECT_BY_ID =
             "SELECT * FROM patients WHERE patient_id=?";
@@ -49,12 +48,12 @@ public class PatientDAOImpl implements CrudDAO<Patient>{
 
         Patient patient = null;
 
-        try (PreparedStatement preparedStatement = ConnectionDB.getPrepareStatement(SQL_SELECT_BY_ID)){
+        try (PreparedStatement preparedStatement = ConnectionDB.getPrepareStatement(SQL_SELECT_BY_ID)) {
 
             preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
 
-            if(resultSet.next()){
+            if (resultSet.next()) {
                 patient = new Patient(
                         resultSet.getInt("patient_id"),
                         resultSet.getString("email"),
@@ -71,7 +70,7 @@ public class PatientDAOImpl implements CrudDAO<Patient>{
                 );
             }
 
-        } catch (SQLException e){
+        } catch (SQLException e) {
             throw new IllegalStateException(e);
         }
 
@@ -83,7 +82,7 @@ public class PatientDAOImpl implements CrudDAO<Patient>{
 
         int status = 0;
 
-        try (PreparedStatement preparedStatement = ConnectionDB.getPrepareStatement(SQL_INSERT_ALL)){
+        try (PreparedStatement preparedStatement = ConnectionDB.getPrepareStatement(SQL_INSERT_ALL)) {
 
             preparedStatement.setString(1, patient.getEmail());
             preparedStatement.setString(2, patient.getPassword());
@@ -98,7 +97,7 @@ public class PatientDAOImpl implements CrudDAO<Patient>{
 
             status = preparedStatement.executeUpdate();
 
-        } catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return status;
@@ -109,7 +108,7 @@ public class PatientDAOImpl implements CrudDAO<Patient>{
 
         int status = 0;
 
-        try (PreparedStatement preparedStatement = ConnectionDB.getPrepareStatement(SQL_UPDATE_INFO)){
+        try (PreparedStatement preparedStatement = ConnectionDB.getPrepareStatement(SQL_UPDATE_INFO)) {
 
             preparedStatement.setString(1, patient.getFullName());
             preparedStatement.setInt(2, patient.getWeight());
@@ -121,7 +120,7 @@ public class PatientDAOImpl implements CrudDAO<Patient>{
 
             status = preparedStatement.executeUpdate();
 
-        } catch(SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
 
@@ -133,12 +132,12 @@ public class PatientDAOImpl implements CrudDAO<Patient>{
 
         int status = 0;
 
-        try (PreparedStatement preparedStatement = ConnectionDB.getPrepareStatement(SQL_DELETE_ACCOUNT)){
+        try (PreparedStatement preparedStatement = ConnectionDB.getPrepareStatement(SQL_DELETE_ACCOUNT)) {
 
             preparedStatement.setInt(1, id);
             status = preparedStatement.executeUpdate();
 
-        } catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
 

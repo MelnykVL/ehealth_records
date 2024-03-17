@@ -1,29 +1,28 @@
 package edu.diploma.dao;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 public class LoginDAO {
 
-    public static int validate(String email,String pass){
+    public static int validate(String email, String pass) {
 
         int status = 0;
 
         try (PreparedStatement ps = ConnectionDB.getPrepareStatement("SELECT * FROM patients WHERE email=? AND password=?")) {
-            ps.setString(1,email);
-            ps.setString(2,pass);
+            ps.setString(1, email);
+            ps.setString(2, pass);
 
             ResultSet rs = ps.executeQuery();
 
             //status = rs.getInt("patient_id");
 
-            if(rs.next())
+            if (rs.next())
                 status = rs.getInt("patient_id");
 
 //            return status;
 
-        }catch(Exception e){
+        } catch (Exception e) {
             System.out.println(e);
         }
 
@@ -40,7 +39,7 @@ public class LoginDAO {
 
             ResultSet rs = ps.executeQuery();
             status = rs.next();
-        } catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e);
         }
 

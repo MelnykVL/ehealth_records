@@ -17,7 +17,7 @@ public class ConnectionDB {
         return getConnection().prepareStatement(sql);
     }
 
-    private static Connection getConnection(){
+    private static Connection getConnection() {
         if (connection == null) {
             Properties prop = loadPropertiesFile();
 

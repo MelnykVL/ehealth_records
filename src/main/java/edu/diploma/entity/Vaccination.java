@@ -11,7 +11,7 @@ public class Vaccination {
     private String addressOfBuild;
     private Patient patient = new Patient();
 
-    public Vaccination(){
+    public Vaccination() {
 
     }
 

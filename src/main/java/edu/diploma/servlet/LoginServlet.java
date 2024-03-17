@@ -2,13 +2,15 @@ package edu.diploma.servlet;
 
 import edu.diploma.dao.LoginDAO;
 import edu.diploma.dao.PatientDAOImpl;
-import edu.diploma.dao.CrudDAO;
 import edu.diploma.entity.Patient;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.*;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -29,7 +31,7 @@ public class LoginServlet extends HttpServlet {
 
         HttpSession session = req.getSession();
 
-        if(id > 0){
+        if (id > 0) {
 
             PatientDAOImpl p = new PatientDAOImpl();
 

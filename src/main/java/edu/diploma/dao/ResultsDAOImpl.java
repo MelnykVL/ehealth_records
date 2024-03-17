@@ -10,7 +10,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ResultsDAOImpl implements CrudDAO<Result>{
+public class ResultsDAOImpl implements CrudDAO<Result> {
 
     private Connection connection;
 
@@ -39,7 +39,7 @@ public class ResultsDAOImpl implements CrudDAO<Result>{
 
         int status = 0;
 
-        try (PreparedStatement preparedStatement = ConnectionDB.getPrepareStatement(SQL_SAVE_RESULT)){
+        try (PreparedStatement preparedStatement = ConnectionDB.getPrepareStatement(SQL_SAVE_RESULT)) {
 
             preparedStatement.setObject(1, result.getCreatedIn());
             preparedStatement.setString(2, result.getFilePath());
@@ -49,7 +49,7 @@ public class ResultsDAOImpl implements CrudDAO<Result>{
 
             status = preparedStatement.executeUpdate();
 
-        } catch (SQLException e){
+        } catch (SQLException e) {
             throw new IllegalStateException(e);
         }
 
@@ -67,13 +67,13 @@ public class ResultsDAOImpl implements CrudDAO<Result>{
 
         int status = 0;
 
-        try (PreparedStatement preparedStatement = ConnectionDB.getPrepareStatement(SQL_DELETE_RESULT)){
+        try (PreparedStatement preparedStatement = ConnectionDB.getPrepareStatement(SQL_DELETE_RESULT)) {
 
             preparedStatement.setInt(1, id);
 
             status = preparedStatement.executeUpdate();
 
-        } catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
 
@@ -86,13 +86,13 @@ public class ResultsDAOImpl implements CrudDAO<Result>{
 
         List<Result> results = new ArrayList<>();
 
-        try (PreparedStatement preparedStatement = ConnectionDB.getPrepareStatement(SQL_SELECT_ALL_RESULTS)){
+        try (PreparedStatement preparedStatement = ConnectionDB.getPrepareStatement(SQL_SELECT_ALL_RESULTS)) {
 
             preparedStatement.setInt(1, id);
 
             ResultSet resultSet = preparedStatement.executeQuery();
 
-            while(resultSet.next()){
+            while (resultSet.next()) {
 
                 Result result = new Result();
                 result.setResultId(resultSet.getInt("result_id"));
@@ -105,7 +105,7 @@ public class ResultsDAOImpl implements CrudDAO<Result>{
 
             }
 
-        } catch (SQLException e){
+        } catch (SQLException e) {
             throw new IllegalStateException(e);
         }
 

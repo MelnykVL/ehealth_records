@@ -1,7 +1,7 @@
 package edu.diploma.servlet;
 
-import edu.diploma.dao.PatientDAOImpl;
 import edu.diploma.dao.CrudDAO;
+import edu.diploma.dao.PatientDAOImpl;
 import edu.diploma.entity.Patient;
 
 import javax.servlet.RequestDispatcher;

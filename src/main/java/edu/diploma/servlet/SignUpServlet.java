@@ -1,8 +1,8 @@
 package edu.diploma.servlet;
 
-import edu.diploma.dao.PatientDAOImpl;
 import edu.diploma.dao.CrudDAO;
 import edu.diploma.dao.LoginDAO;
+import edu.diploma.dao.PatientDAOImpl;
 import edu.diploma.entity.Patient;
 
 import javax.servlet.RequestDispatcher;
@@ -34,19 +34,19 @@ public class SignUpServlet extends HttpServlet {
         String bloodType = req.getParameter("select_blood_type");
         String profession;
 
-        if(req.getParameter("select_prof").equals("Other")) {
+        if (req.getParameter("select_prof").equals("Other")) {
             profession = req.getParameter("profession");
         } else {
             profession = req.getParameter("select_prof");
         }
 
-        if(LoginDAO.validate(email)){
+        if (LoginDAO.validate(email)) {
 
             out.write("<h2 class=\"user__title\">" + "Користувач з такою електронною поштою вже існує!" + "</h2>");
             RequestDispatcher requestDispatcher = req.getRequestDispatcher("sign_up.jsp");
             requestDispatcher.include(req, resp);
 
-        } else{
+        } else {
 
             Patient patient = new Patient(
                     email, pass, fullName,
@@ -55,7 +55,7 @@ public class SignUpServlet extends HttpServlet {
             );
 
             CrudDAO<Patient> p = new PatientDAOImpl();
-            if(p.save(patient) > 0) {
+            if (p.save(patient) > 0) {
                 RequestDispatcher requestDispatcher = req.getRequestDispatcher("index.jsp");
                 requestDispatcher.forward(req, resp);
             } else

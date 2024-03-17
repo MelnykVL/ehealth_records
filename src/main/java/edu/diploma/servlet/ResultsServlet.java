@@ -1,18 +1,21 @@
 package edu.diploma.servlet;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.*;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.time.LocalDate;
-
 import com.oreilly.servlet.MultipartRequest;
 import edu.diploma.dao.CrudDAO;
 import edu.diploma.dao.ResultsDAOImpl;
 import edu.diploma.entity.Patient;
 import edu.diploma.entity.Result;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.time.LocalDate;
 
 @WebServlet(name = "ResultsServlet", urlPatterns = {"/resultsServlet"})
 public class ResultsServlet extends HttpServlet {

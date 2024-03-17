@@ -11,7 +11,7 @@ public class Result {
     private String name;
     private Patient patient = new Patient();
 
-    public Result(){
+    public Result() {
 
     }
 

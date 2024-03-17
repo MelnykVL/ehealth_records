@@ -2,12 +2,14 @@ package edu.diploma.dao;
 
 import edu.diploma.entity.Record;
 
-import java.sql.*;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RecordDAOImpl implements CrudDAO<Record>{
+public class RecordDAOImpl implements CrudDAO<Record> {
 
     private static final String SQL_SAVE_RECORD =
             "INSERT INTO records (" +
@@ -37,7 +39,7 @@ public class RecordDAOImpl implements CrudDAO<Record>{
 
         int status = 0;
 
-        try (PreparedStatement preparedStatement = ConnectionDB.getPrepareStatement(SQL_SAVE_RECORD)){
+        try (PreparedStatement preparedStatement = ConnectionDB.getPrepareStatement(SQL_SAVE_RECORD)) {
 
             preparedStatement.setObject(1, record.getCreatedIn());
             preparedStatement.setString(2, record.getDisease());
@@ -50,7 +52,7 @@ public class RecordDAOImpl implements CrudDAO<Record>{
 
             status = preparedStatement.executeUpdate();
 
-        } catch (SQLException e){
+        } catch (SQLException e) {
             throw new IllegalStateException(e);
         }
 
@@ -67,12 +69,12 @@ public class RecordDAOImpl implements CrudDAO<Record>{
 
         int status = 0;
 
-        try (PreparedStatement preparedStatement = ConnectionDB.getPrepareStatement(SQL_DELETE_RECORD)){
+        try (PreparedStatement preparedStatement = ConnectionDB.getPrepareStatement(SQL_DELETE_RECORD)) {
 
             preparedStatement.setInt(1, id);
             status = preparedStatement.executeUpdate();
 
-        } catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
 
@@ -84,12 +86,12 @@ public class RecordDAOImpl implements CrudDAO<Record>{
 
         List<Record> records = new ArrayList<>();
 
-        try (PreparedStatement preparedStatement = ConnectionDB.getPrepareStatement(SQL_SELECT_ALL_RECORDS)){
+        try (PreparedStatement preparedStatement = ConnectionDB.getPrepareStatement(SQL_SELECT_ALL_RECORDS)) {
 
             preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
 
-            while(resultSet.next()){
+            while (resultSet.next()) {
 
                 Record record = new Record();
                 record.setRecordId(resultSet.getInt("record_id"));
@@ -105,7 +107,7 @@ public class RecordDAOImpl implements CrudDAO<Record>{
 
             }
 
-        } catch (SQLException e){
+        } catch (SQLException e) {
             throw new IllegalStateException(e);
         }
 

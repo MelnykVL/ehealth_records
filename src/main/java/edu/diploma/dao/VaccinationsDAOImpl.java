@@ -2,7 +2,6 @@ package edu.diploma.dao;
 
 import edu.diploma.entity.Vaccination;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,7 +9,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class VaccinationsDAOImpl implements CrudDAO<Vaccination>{
+public class VaccinationsDAOImpl implements CrudDAO<Vaccination> {
 
 
     private static final String SQL_SAVE_VACCINATION =
@@ -35,7 +34,7 @@ public class VaccinationsDAOImpl implements CrudDAO<Vaccination>{
 
         int status = 0;
 
-        try (PreparedStatement preparedStatement = ConnectionDB.getPrepareStatement(SQL_SAVE_VACCINATION)){
+        try (PreparedStatement preparedStatement = ConnectionDB.getPrepareStatement(SQL_SAVE_VACCINATION)) {
 
             preparedStatement.setString(1, vaccination.getVaccineName());
             preparedStatement.setString(2, vaccination.getAddressOfBuild());
@@ -45,7 +44,7 @@ public class VaccinationsDAOImpl implements CrudDAO<Vaccination>{
 
             status = preparedStatement.executeUpdate();
 
-        } catch (SQLException e){
+        } catch (SQLException e) {
             throw new IllegalStateException(e);
         }
 
@@ -68,13 +67,13 @@ public class VaccinationsDAOImpl implements CrudDAO<Vaccination>{
 
         List<Vaccination> vaccinations = new ArrayList<>();
 
-        try (PreparedStatement preparedStatement = ConnectionDB.getPrepareStatement(SQL_SELECT_ALL_RECORDS)){
+        try (PreparedStatement preparedStatement = ConnectionDB.getPrepareStatement(SQL_SELECT_ALL_RECORDS)) {
 
             preparedStatement.setInt(1, id);
 
             ResultSet resultSet = preparedStatement.executeQuery();
 
-            while(resultSet.next()){
+            while (resultSet.next()) {
 
                 Vaccination vaccination = new Vaccination();
                 vaccination.setVaccinationId(resultSet.getInt("vaccination_id"));
@@ -87,7 +86,7 @@ public class VaccinationsDAOImpl implements CrudDAO<Vaccination>{
 
             }
 
-        } catch (SQLException e){
+        } catch (SQLException e) {
             throw new IllegalStateException(e);
         }
 

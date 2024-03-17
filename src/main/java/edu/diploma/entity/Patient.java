@@ -23,7 +23,7 @@ public class Patient {
     private List<Result> results = new ArrayList<>();
     private List<Vaccination> vaccinations = new ArrayList<>();
 
-    public Patient(){
+    public Patient() {
 
     }
 
@@ -211,15 +211,15 @@ public class Patient {
         this.vaccinations = vaccinations;
     }
 
-    public void addRecord(Record record){
+    public void addRecord(Record record) {
         this.records.add(record);
     }
 
-    public void addResult(Result result){
+    public void addResult(Result result) {
         this.results.add(result);
     }
 
-    public void addVaccination(Vaccination vaccination){
+    public void addVaccination(Vaccination vaccination) {
         this.vaccinations.add(vaccination);
     }
 
